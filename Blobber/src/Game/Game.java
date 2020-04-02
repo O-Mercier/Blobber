@@ -2,7 +2,7 @@ package Game;
 
 import UI.*;
 
-public class Game {
+public class Game implements LoopObserver {
 	private AppWindow appWindow;
 	private Player player;
 	
@@ -12,6 +12,7 @@ public class Game {
 	
 	public void startGame(String name) {
 		player = new Player(name);
+		GameLoop.getInstance().registerObserver(this);
 	}
 	
 	public void endGame() {
@@ -20,5 +21,10 @@ public class Game {
 	
 	public Player getPlayer() {
 		return player;
+	}
+
+	@Override
+	public void tick() {
+		
 	}
 }
