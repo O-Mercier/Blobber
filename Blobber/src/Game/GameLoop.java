@@ -2,7 +2,7 @@ package Game;
 
 import java.util.ArrayList;
 
-public class GameLoop {
+public class GameLoop implements Runnable{
 	
 	private ArrayList<LoopObserver> observers;
 	private static GameLoop gameLoop = null;
@@ -37,11 +37,12 @@ public class GameLoop {
 		}
 	}
 	
+	@Override
 	public void run() {
 		isOver = false;
 		try {
 			while (!isOver) {			
-				this.notifyObservers();
+				notifyObservers();
 				Thread.sleep(200);
 			}
 		} catch (InterruptedException e) {
