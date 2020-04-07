@@ -21,7 +21,6 @@ public class Blob extends ABlob{
 		setBounds(x, y, diameter, diameter);
 		g.setColor(color);
 		g.fillOval(0, 0, diameter, diameter);
-		drawHealthBar(g);
 	}
 	
 	

@@ -4,6 +4,9 @@ import java.util.Random;
 
 import Blob.ABlob;
 import Blob.Blob;
+import Cursor.ACursorDecorator;
+import Cursor.BaseCursor;
+import Cursor.ICursor;
 import Popper.SingleClickPopper;
 import UI.*;
 
@@ -13,7 +16,8 @@ public class Game implements LoopObserver {
 	private int max_w = 800, max_h = 600;
 	private Random rand = new Random();
 	private int ticksBeforeNewBlob, ticksBeforeNewBlobCounter;
-
+	
+	private ICursor c;
 	private AppWindow appWindow;
 	private Player player;
 	private GameFrame gameFrame;
@@ -24,6 +28,7 @@ public class Game implements LoopObserver {
 	}
 	
 	public void startGame(String name) {
+		c = new BaseCursor();
 		player = new Player(name);
 		GameLoop.getInstance().registerObserver(this);
 		gameFrame.setVisible(true);
@@ -86,5 +91,14 @@ public class Game implements LoopObserver {
 	}
 	private int damage() {
 		return 1+rand.nextInt(MAX_DAMAGE);
+	}
+	
+	public void decorateCursor(ACursorDecorator cd) {
+		cd.decorate(c);
+		c = cd;
+	}
+
+	public int getCursorDamage() {
+		return c.getDamage();
 	}
 }
