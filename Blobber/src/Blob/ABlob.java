@@ -23,6 +23,7 @@ public abstract class ABlob extends JLabel implements LoopObserver {
 		this.hp = hp;
 		this.score = score;
 		this.game = game;
+		GameLoop.getInstance().registerObserver(this);
 	}
 	
 	public void tick() {

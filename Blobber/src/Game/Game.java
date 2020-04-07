@@ -13,7 +13,7 @@ public class Game implements LoopObserver {
 	private int max_w = 800, max_h = 600;
 	private Random rand = new Random();
 	private int ticksBeforeNewBlob, ticksBeforeNewBlobCounter;
-	
+
 	private AppWindow appWindow;
 	private Player player;
 	private GameFrame gameFrame;
@@ -36,6 +36,7 @@ public class Game implements LoopObserver {
 	public void endGame() {
 		gameFrame.setVisible(false);
 		GameLoop.getInstance().endGame();
+		gameFrame.removeAllBlobs();
 	}
 	
 	public Player getPlayer() {
