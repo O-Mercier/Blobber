@@ -10,6 +10,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 
 import Game.Game;
+import HighScore.Score;
 
 import javax.swing.JTextField;
 
@@ -76,7 +77,17 @@ public class AppWindow {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			game.startGame(iName.getText());
+		}	
+	}
+	
+	public void showScore(ArrayList<Score> scores) {
+		String list = "<html>";
+		for (Score s: scores) {
+			list += s.getName();
+			list += " : ";
+			list += String.valueOf(s.getScore());
 		}
-		
+		list += "</html>";
+		scoresList.setText(list);
 	}
 }

@@ -8,6 +8,8 @@ import Blob.BlobFactory;
 import Cursor.ACursorDecorator;
 import Cursor.BaseCursor;
 import Cursor.ICursor;
+import HighScore.HighScoresManager;
+import HighScore.Score;
 import Popper.SingleClickPopper;
 import UI.*;
 
@@ -18,9 +20,12 @@ public class Game implements LoopObserver {
 	private Player player;
 	private GameFrame gameFrame;
 	private BlobFactory blobFactory; 
+	private HighScoresManager hsm;
 	
 	public Game () {
+		hsm = new HighScoresManager();
 		appWindow = new AppWindow(this);
+		appWindow.showScore(hsm.getScores());
 		gameFrame = new GameFrame();
 	}
 	
@@ -37,6 +42,8 @@ public class Game implements LoopObserver {
 	}
 	
 	public void endGame() {
+		hsm.addScore(new Score(player.getScore(), player.getName()));
+		appWindow.showScore(hsm.getScores());
 		gameFrame.setVisible(false);
 		GameLoop.getInstance().endGame();
 		gameFrame.removeAllBlobs();
