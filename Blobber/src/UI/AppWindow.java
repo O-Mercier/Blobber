@@ -17,10 +17,9 @@ import javax.swing.JTextField;
 public class AppWindow {
 
 	private JFrame frmBlobber;
-	private JButton bStart;
+	private JButton bStart, bExtreme;
 	private JLabel scoresList, scoreTitle;
 	private Game game;
-	private Listener l;
 	private JTextField iName;
 	
 	/**
@@ -42,9 +41,14 @@ public class AppWindow {
 		frmBlobber.getContentPane().setLayout(null);
 		
 		bStart = new JButton("Démarrer");
-		bStart.setBounds(0, 413, 784, 148);
+		bStart.setBounds(0, 413, 784, 108);
 		bStart.setFont(new Font("Tahoma", Font.PLAIN, 55));
 		frmBlobber.getContentPane().add(bStart);
+
+		bExtreme = new JButton("MODE EXTREME");
+		bExtreme.setBounds(0, 313, 784, 108);
+		bExtreme.setFont(new Font("Tahoma", Font.PLAIN, 55));
+		frmBlobber.getContentPane().add(bExtreme);
 		
 		scoresList = new JLabel("Aucun Score");
 		scoresList.setBounds(0, 59, 784, 290);
@@ -67,18 +71,13 @@ public class AppWindow {
 		iName.setColumns(10);
 		frmBlobber.getContentPane().add(iName);
 		
-		l = new Listener();
-		bStart.addActionListener(l);
+
+		bStart.addActionListener(e -> game.startGame(iName.getText()));
+		bExtreme.addActionListener(e -> game.startGameExtreme(iName.getText()));
 		
 		frmBlobber.setVisible(true);
 	}
-	
-	private class Listener implements ActionListener{
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			game.startGame(iName.getText());
-		}	
-	}
+
 	
 	public void showScore(ArrayList<Score> scores) {
 		String list = "<html>";

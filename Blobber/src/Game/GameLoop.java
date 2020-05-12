@@ -7,6 +7,7 @@ public class GameLoop implements Runnable{
 	private ArrayList<LoopObserver> observers;
 	private static GameLoop gameLoop = null;
 	private boolean isOver = false;
+	private int speed = 200;
 	
 	private GameLoop () {
 		observers = new ArrayList<LoopObserver>();
@@ -18,7 +19,11 @@ public class GameLoop implements Runnable{
 		}
 		return gameLoop;
 	}
-	
+
+	public void setSpeed(int speed){
+		this.speed = speed;
+	}
+
 	public void unregisterObserver(LoopObserver obs) {
 		observers.remove(obs);
 	}
@@ -43,7 +48,7 @@ public class GameLoop implements Runnable{
 		try {
 			while (!isOver) {			
 				notifyObservers();
-				Thread.sleep(200);
+				Thread.sleep(speed);
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();

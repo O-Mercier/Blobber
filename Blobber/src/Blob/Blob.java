@@ -18,7 +18,5 @@ public class Blob extends ABlob{
 		g.setColor(color);
 		g.fillOval(0, 0, w, h);
 	}
-	
-	
-	
+
 }

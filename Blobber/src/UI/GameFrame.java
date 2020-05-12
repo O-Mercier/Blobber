@@ -9,8 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Blob.ABlob;
+import Game.LoopObserver;
 
-public class GameFrame extends JFrame {
+public class GameFrame extends JFrame{
 
 	public GameFrame() {
 		initialize();
@@ -40,4 +41,5 @@ public class GameFrame extends JFrame {
 				this.remove(c[i]);
 		}
 	}
+
 }

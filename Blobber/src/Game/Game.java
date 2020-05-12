@@ -5,6 +5,7 @@ import java.util.Random;
 import Blob.ABlob;
 import Blob.Blob;
 import Blob.BlobFactory;
+import Blob.ExtremeBlobFactory;
 import Cursor.ACursorDecorator;
 import Cursor.BaseCursor;
 import Cursor.ICursor;
@@ -28,15 +29,29 @@ public class Game implements LoopObserver {
 		appWindow = new AppWindow(this);
 		appWindow.showScore(hsm.getScores());
 		gameFrame = new GameFrame();
-		infoFrame = new InfoFrame(this);
 	}
-	
+
+	public void startGameExtreme(String name) {
+		blobFactory = new ExtremeBlobFactory();
+		c = new BaseCursor();
+		player = new Player(name);
+		GameLoop.getInstance().registerObserver(this);
+		gameFrame.setVisible(true);
+		infoFrame = new InfoFrame(this);
+		infoFrame.setVisible(true);
+		Thread t = new Thread(GameLoop.getInstance());
+		t.start();
+		ticksBeforeNewBlobCounter = 5;
+		ticksBeforeNewBlob = 0;
+	}
+
 	public void startGame(String name) {
 		blobFactory = new BlobFactory();
 		c = new BaseCursor();
 		player = new Player(name);
 		GameLoop.getInstance().registerObserver(this);
 		gameFrame.setVisible(true);
+		infoFrame = new InfoFrame(this);
 		infoFrame.setVisible(true);
 		Thread t = new Thread(GameLoop.getInstance());
 		t.start();
@@ -71,9 +86,8 @@ public class Game implements LoopObserver {
 			System.out.println("HP: " + player.getHP());
 			ABlob b = blobFactory.createBlob(this);
 			gameFrame.addBlob(b);
-			
-			// logique de creation des blobs
-			ticksBeforeNewBlobCounter -= 1;
+			if(!(blobFactory instanceof ExtremeBlobFactory))
+				ticksBeforeNewBlobCounter -= 1;
 			ticksBeforeNewBlob = ticksBeforeNewBlobCounter;
 		}
 	}
