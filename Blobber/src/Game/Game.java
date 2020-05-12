@@ -19,6 +19,7 @@ public class Game implements LoopObserver {
 	private AppWindow appWindow;
 	private Player player;
 	private GameFrame gameFrame;
+	private InfoFrame infoFrame;
 	private BlobFactory blobFactory; 
 	private HighScoresManager hsm;
 	
@@ -27,14 +28,16 @@ public class Game implements LoopObserver {
 		appWindow = new AppWindow(this);
 		appWindow.showScore(hsm.getScores());
 		gameFrame = new GameFrame();
+		infoFrame = new InfoFrame(this);
 	}
 	
 	public void startGame(String name) {
-		blobFactory = new BlobFactory(gameFrame.getWidth(), gameFrame.getHeight());
+		blobFactory = new BlobFactory();
 		c = new BaseCursor();
 		player = new Player(name);
 		GameLoop.getInstance().registerObserver(this);
 		gameFrame.setVisible(true);
+		infoFrame.setVisible(true);
 		Thread t = new Thread(GameLoop.getInstance());
 		t.start();
 		ticksBeforeNewBlobCounter = 20;
@@ -45,6 +48,7 @@ public class Game implements LoopObserver {
 		hsm.addScore(new Score(player.getScore(), player.getName()));
 		appWindow.showScore(hsm.getScores());
 		gameFrame.setVisible(false);
+		infoFrame.setVisible(false);
 		GameLoop.getInstance().endGame();
 		gameFrame.removeAllBlobs();
 	}

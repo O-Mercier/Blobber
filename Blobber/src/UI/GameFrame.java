@@ -20,7 +20,7 @@ public class GameFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		setUndecorated(true);
-	}
+		}
 	
 	public void addBlob (ABlob b) {
 		getContentPane().add(b);

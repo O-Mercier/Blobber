@@ -12,12 +12,11 @@ public class BlobFactory {
 	private int currentHP = 2;
 	private final int MAX_DAMAGE = 19, MIN_TICKS = 20, MAX_TICKS = 20, BLOB_WIDTH = 20, BLOB_HEIGHT = 20;
 	private final int MIN_WIDTH = 20, MIN_HEIGHT = 20, MIN_DAMAGE = 1, POISON_HP = 1;
-	private int max_w = 800, max_h = 600;
+	private int max_w = 700, max_h = 600;
 	private Random rand = new Random();
 
-	public BlobFactory(int width, int heigth) {
-		max_w = width;
-		max_h = heigth;
+	public BlobFactory() {
+
 	}
 
 	private int w() {
