@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import Game.Game;
+import Popper.MouseEnteredPopper;
 import Popper.SingleClickPopper;
 
 public class BlobFactory {
 	private ArrayList<Integer> intUsedToCreateBlobs = new ArrayList<Integer>();
-	private int currentHP = 1;
+	private int currentHP = 2;
 	private final int MAX_DAMAGE = 19, MIN_TICKS = 20, MAX_TICKS = 20, BLOB_WIDTH = 20, BLOB_HEIGHT = 20;
-	private final int MIN_WIDTH = 20, MIN_HEIGHT = 20, MIN_DAMAGE = 1;
+	private final int MIN_WIDTH = 20, MIN_HEIGHT = 20, MIN_DAMAGE = 1, POISON_HP = 1;
 	private int max_w = 800, max_h = 600;
 	private Random rand = new Random();
 
@@ -61,22 +62,25 @@ public class BlobFactory {
 	public ABlob createBlob(Game game) {
 		if(intUsedToCreateBlobs.isEmpty()) {
 			fillIntArray();
-			currentHP*=2;
+			currentHP+=2;
 		}
 		
 		int blobCaseValue = intUsedToCreateBlobs.remove(0);
 		
 		switch(blobCaseValue) {
-		case 0:
-			return bonusBlob(game);
-		default:
-			return blob(game);
+			case 0:
+				return bonusBlob(game);
+			case 1:
+				return poisonBlob(game);
+			default:
+				return blob(game);
 		}
 	}
 	
 	private Blob blob(Game game) {
-		int d = w();
-		Blob b = new Blob(ticks(),damage(),currentHP,currentHP,x(d),y(d),d,game);
+		int w = w();
+		int h = h();
+		Blob b = new Blob(ticks(),damage(),currentHP,currentHP,x(w),y(h),h,w,game);
 		b.addMouseListener(new SingleClickPopper(b));
 		return b;
 	}
@@ -86,6 +90,13 @@ public class BlobFactory {
 		BonusBlob b = new BonusBlob(ticks(),damage(),currentHP,currentHP,x(w),y(h),w,h,game);
 		b.addMouseListener(new SingleClickPopper(b));
 		return b;	
+	}
+	private PoisonBlob poisonBlob(Game game) {
+		int w = w();
+		int h = h();
+		PoisonBlob b = new PoisonBlob(ticks(),damage(), POISON_HP, 0,x(w),y(h),w,h,game);
+		b.addMouseListener(new MouseEnteredPopper(b));
+		return b;
 	}
 	
 }

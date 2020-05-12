@@ -1,5 +1,8 @@
 package Cursor;
 
-public class CursorMalus {
+public class CursorMalus extends ACursorDecorator {
 
+    public CursorMalus() {
+        super(-1);
+    }
 }

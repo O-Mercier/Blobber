@@ -55,13 +55,16 @@ public class Game implements LoopObserver {
 
 	@Override
 	public void tick() {
-		if (player.getHP() <0) {
+		if (player.getHP() <=0) {
 			endGame();
 		}
 		if (ticksBeforeNewBlob > 0) {
 			ticksBeforeNewBlob--;
 		} else {	
 			System.out.println("Creation dun blob");
+			System.out.println("Score: " + player.getScore());
+			System.out.println("Damage: " + getCursorDamage());
+			System.out.println("HP: " + player.getHP());
 			ABlob b = blobFactory.createBlob(this);
 			gameFrame.addBlob(b);
 			

@@ -7,14 +7,8 @@ import Cursor.CursorBonus;
 import Game.Game;
 
 public class BonusBlob extends ABlob {
-	private int x, y, w, h;
-
 	public BonusBlob(int ticksCounter, int damage, int currentHP, int score, int x, int y, int w, int h, Game game) {
-		super(ticksCounter, damage, currentHP, score, game);
-		this.x = x;
-		this.y = y;
-		this.w = w;
-		this.h = h;
+		super(ticksCounter, damage, currentHP, score, x, y, w, h, game);
 		this.color = Color.GREEN;
 	}
 	
@@ -26,8 +20,8 @@ public class BonusBlob extends ABlob {
 
 	@Override
 	protected void drawBlob(Graphics g) {
-		setBounds(x, y, w, h);
+		super.drawBlob(g);
 		g.setColor(color);
-		g.fillOval(0, 0, w, h);	
+		g.fillOval(0, 0, w, h);
 	}
 }

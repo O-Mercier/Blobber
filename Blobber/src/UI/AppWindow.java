@@ -86,6 +86,7 @@ public class AppWindow {
 			list += s.getName();
 			list += " : ";
 			list += String.valueOf(s.getScore());
+			list += "<br>";
 		}
 		list += "</html>";
 		scoresList.setText(list);

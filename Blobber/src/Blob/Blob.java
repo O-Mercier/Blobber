@@ -6,21 +6,17 @@ import java.awt.Graphics;
 import Game.Game;
 
 public class Blob extends ABlob{
-	private int x, y, diameter;
 
-	public Blob(int ticksCounter, int damage, int hp, int score, int x, int y, int diameter, Game game) {
-		super(ticksCounter, damage, hp, score, game);
+	public Blob(int ticksCounter, int damage, int hp, int score,  int x, int y, int w, int h, Game game) {
+		super(ticksCounter, damage, hp, score, x, y, w, h, game);
 		this.color = Color.MAGENTA;
-		this.x = x;
-		this.y = y;
-		this.diameter = diameter;
 	}
 
 	@Override
 	protected void drawBlob(Graphics g) {
-		setBounds(x, y, diameter, diameter);
+		super.drawBlob(g);
 		g.setColor(color);
-		g.fillOval(0, 0, diameter, diameter);
+		g.fillOval(0, 0, w, h);
 	}
 	
 	
